@@ -14,9 +14,7 @@ import os
 #############################################################################################################################
 # BEGIN USER INPUT PARAMETERS
 
-# Define these according to your local directory #
-user = 'jdrichardso3'
-home_dir = f'C:/Users/{user}/OneDrive - UW-Madison/Documents/Research/Papers/Paper Drafts/2_aB Peptide Predictions/Data/'
+home_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Input parameters
 bb = 'aaB' # aaB (Rounds 1-4) or aaBaaaB (Rounds 5-6)
@@ -154,16 +152,16 @@ if bb == 'aaB':
                             print(f'Done with iteration {it} of {tot_it}')
     
         #Create Smiles Dataframe for export
-        smi_df = pd.DataFrame(index=np.arange(tot_it), columns=['seq', 'smi'])
-        smi_df['seq'] = seq
-        smi_df['smi'] = smiles
+        smi_df = pd.DataFrame(index=np.arange(tot_it), columns=['Sequence', 'SMILES'])
+        smi_df['Sequence'] = seq
+        smi_df['SMILES'] = smiles
         
         smi_df.to_csv(f'{test_path}/SMILES_aaB.csv')
     
     else:
         smi_df = pd.read_csv(f'{test_path}/SMILES_aaB.csv', index_col = 0, header = 0)
-        seq = smi_df['seq']
-        smiles = smi_df['smi']
+        seq = smi_df['Sequence']
+        smiles = smi_df['SMILES']
     
 # Templating new sequences for Rounds 5-6 on aaBaaaB backbone (Figure 1d)
 elif bb == 'aaBaaaB': 
@@ -254,15 +252,15 @@ elif bb == 'aaBaaaB':
                             print(f'Done with iteration {it} of {tot_it}')
     
         #Create Smiles Dataframe for export
-        smi_df = pd.DataFrame(index=np.arange(tot_it), columns=['seq', 'smi'])
-        smi_df['seq'] = seq
-        smi_df['smi'] = smiles
+        smi_df = pd.DataFrame(index=np.arange(tot_it), columns=['Sequence', 'SMILES'])
+        smi_df['Sequence'] = seq
+        smi_df['SMILES'] = smiles
         
         smi_df.to_csv(f'{test_path}/SMILES_aaBaaaB.csv')
     
     else:
         smi_df = pd.read_csv(f'{test_path}/SMILES_aaBaaaB.csv', index_col = 0, header = 0)
-        seq = smi_df['seq']
-        smiles = smi_df['smi']
+        seq = smi_df['Sequence']
+        smiles = smi_df['SMILES']
 
    

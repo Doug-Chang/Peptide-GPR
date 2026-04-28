@@ -21,9 +21,7 @@ from rdkit.ML.Descriptors import MoleculeDescriptors
 #############################################################################################################################
 # BEGIN USER INPUT PARAMETERS
 
-# Define these according to your local directory #
-user = 'jdrichardso3'
-home_dir = f'C:/Users/{user}/OneDrive - UW-Madison/Documents/Research/Papers/Paper Drafts/2_aB Peptide Predictions/Data/'
+home_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Input parameters
 data = 'test' # train test
@@ -69,9 +67,9 @@ if data == 'train':
     desc_mat_df.to_csv(f'{train_path}/RDKit.csv', encoding='utf-8-sig')
 elif data == 'test':
     if test_bb == 'aaB':
-        desc_mat_df.to_csv(f'{train_path}/RDKit_aaB.csv', encoding='utf-8-sig')
+        desc_mat_df.to_csv(f'{test_path}/RDKit_aaB.csv', encoding='utf-8-sig')
     elif test_bb == 'aaBaaaB':
-        desc_mat_df.to_csv(f'{train_path}/RDKit_aaBaaaB.csv', encoding='utf-8-sig')
+        desc_mat_df.to_csv(f'{test_path}/RDKit_aaBaaaB.csv', encoding='utf-8-sig')
 
 
 

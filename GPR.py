@@ -29,9 +29,7 @@ plt.rc('figure', titlesize=18)  # fontsize of the figure title
 #############################################################################################################################
 # BEGIN USER INPUT PARAMETERS
 
-# Define these according to your local directory #
-user = 'jdrichardso3'
-home_dir = f'C:/Users/{user}/OneDrive - UW-Madison/Documents/Research/Papers/Paper Drafts/2_aB Peptide Predictions/Data/'
+home_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Input parameters
 label = 'HC10' # HC10 MIC
@@ -111,7 +109,7 @@ def df_propalloc(data, n_splits):
     new_df = pd.DataFrame(columns = data.columns)
     for i in range(n_splits):
         for j in range(set_size):
-            new_df = new_df.append(data.loc[[i]])
+            new_df = pd.concat([new_df, data.loc[[i]]])
             i += gap
     
     def Insert_row_(row_number, df, row_value): # Function to insert remaining rows into dataframe
@@ -212,9 +210,7 @@ if update_desc == 'yes':
     opt_alpha = lassocv.alpha_
     
     #Set close to zero coefficients as zero
-    for i in range(len(Coeffs)):
-        if abs(Coeffs[i]) < 10**-5: #10^-5
-            Coeffs[i] = 0
+    Coeffs[abs(Coeffs) < 1e-5] = 0
             
     # Plotting MSE vs Alpha
     fig, ax = plt.subplots()
@@ -286,9 +282,7 @@ if desc_red == 'yes':
             
             idx=1
             for i in X_df_test.columns:
-                for j in range(len(X_df_test.index)):
-                    a =  (train_minmax[i].iloc[0] <= test_bool[str(i)].iloc[j] <= train_minmax[i].iloc[1])
-                    test_bool[i].iloc[j] = a
+                test_bool[i] = (test_bool[i] >= train_minmax[i].iloc[0]) & (test_bool[i] <= train_minmax[i].iloc[1])
                 print(f'Done with test matrix column {idx} of {len(X_df_test.columns)}')
                 idx+=1
                 
@@ -314,9 +308,7 @@ if desc_red == 'yes':
             
             idx=1
             for i in X_df_test.columns:
-                for j in range(len(X_df_test.index)):
-                    a =  (train_minmax[i].iloc[0] <= test_bool[str(i)].iloc[j] <= train_minmax[i].iloc[1])
-                    test_bool[i].iloc[j] = a
+                test_bool[i] = (test_bool[i] >= train_minmax[i].iloc[0]) & (test_bool[i] <= train_minmax[i].iloc[1])
                 print(f'Done with test matrix column {idx} of {len(X_df_test.columns)}')
                 idx+=1
                 

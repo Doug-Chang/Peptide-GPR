@@ -15,9 +15,7 @@ import matplotlib.pyplot as plt
 #############################################################################################################################
 # BEGIN USER INPUT PARAMETERS
 
-# Define these according to your local directory #
-user = 'jdrichardso3'
-home_dir = f'C:/Users/{user}/OneDrive - UW-Madison/Documents/Research/Papers/Paper Drafts/2_aB Peptide Predictions/Data/'
+home_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Inputs
 round_num = '6th' # 1st 2nd 3rd 4th 5th 6th

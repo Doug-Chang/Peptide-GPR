@@ -1,0 +1,8 @@
+pandas
+numpy
+matplotlib
+Pillow
+rdkit
+scikit-learn
+openpyxl
+ipykernel

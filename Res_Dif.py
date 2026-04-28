@@ -17,9 +17,7 @@ from PIL import Image
 #############################################################################################################################
 # BEGIN USER INPUT PARAMETERS
 
-# Define these according to your local directory #
-user = 'jdrichardso3'
-home_dir = f'C:/Users/{user}/OneDrive - UW-Madison/Documents/Research/Papers/Paper Drafts/2_aB Peptide Predictions/Data/'
+home_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Input parameters
 round_num = '1st' # 1st 2nd 3rd 4th 5th 6th
@@ -77,7 +75,7 @@ if round_num=='1st' or round_num=='2nd' or round_num=='3rd' or round_num=='4th':
     new_df = pd.read_csv(f'{test_path}/SMILES_aaB.csv', header=0, index_col=0)  # aaB backbone for Rounds 1-4
 else:
     new_df = pd.read_csv(f'{test_path}/SMILES_aaBaaaB.csv', header=0, index_col=0)  # aaBaaaB backbone for Rounds 5-6
-new_seq = new_df['seq']
+new_seq = new_df['Sequence']
 new_seq_mat = new_seq.str.split('-',expand=True)
 
 # Calculate peptide test seq (new_seq_mat) that are 1,2,3,4 seq different from any training (seq_ref_mat)
@@ -120,7 +118,7 @@ ax.set_xlabel('# Residues Different')
 ax.set_ylabel('Count')
 ax.set_ylim([0,168000])
 bins = np.arange(0, 4 + 1.5) - 0.5
-counts, edges, bars = ax.hist(num_res_dif_df['Test Index'], bins = bins, rwidth=0.9)
+counts, edges, bars = ax.hist(num_res_dif_df['Dif'], bins = bins, rwidth=0.9)
 ax.set_xticks(bins + 0.5)
 plt.bar_label(bars)
 plt.show()
