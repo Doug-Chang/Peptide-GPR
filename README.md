@@ -2,16 +2,17 @@
 
 This repository is a fork of the supplemental code for:
 
-Chang, D. H., Richardson, J. D., Lee, M.-R., Lynn, D. M., Palecek, S. P., & Van Lehn, R. C. Machine learning-driven discovery of highly selective antifungal peptides containing non-canonical β-amino acids. *Chemical Science* **16**, 5579–5594 (2025). https://doi.org/10.1039/D4SC06689H
+Chang, D. H.**‡**, Richardson, J. D.**‡**, Lee, M.-R., Lynn, D. M., Palecek, S. P., & Van Lehn, R. C. Machine learning-driven discovery of highly selective antifungal peptides containing non-canonical β-amino acids. *Chemical Science* **16**, 5579–5594 (2025). https://doi.org/10.1039/D4SC06689H
+**‡** These authors contributed equally.
 
-**Changes from the original:** updated `requirements.txt` (added `openpyxl`, corrected `PIL` → `Pillow`); replaced hard-coded Windows paths (all scripts now use `os.path.dirname(os.path.abspath(__file__))`); enabled pandas 3.0 compatibility (`DataFrame.append` → `pd.concat`, chained indexing); fixed `RDKit.py` test descriptor output writing to `train_path` instead of `test_path`; aligned SMILES CSV column references (`Sequence`, `SMILES`) across `Make_Smiles.py`, `RDKit.py`, `Analysis.py`, `GPR.py`, and `Res_Dif.py`.
+**Changes from the original:** updated `requirements.txt` (added `openpyxl`, corrected `PIL` → `Pillow`); replaced hard-coded paths (all scripts now use `os.path.dirname(os.path.abspath(__file__))`); enabled pandas 3.0 compatibility (`DataFrame.append` → `pd.concat`, chained indexing); updated `RDKit.py` test descriptor output writing to `train_path` instead of `test_path`; aligned SMILES CSV column references (`Sequence`, `SMILES`) across `Make_Smiles.py`, `RDKit.py`, `Analysis.py`, `GPR.py`, and `Res_Dif.py`.
 
 ## Overview
 
 - Active learning pipeline over 6 rounds using Gaussian Process Regression (GPR)
 - Input: RDKit 2D molecular descriptors from peptide SMILES → Output: predicted HC10 and MIC across a 168,000-sequence test design space
 - Descriptor selection via LASSO cross-validation each round; test space reduced to training descriptor range
-- Reproduces figures and analysis from Chang et al. (2025)
+- Reproduces figures and analysis from Chang, D. H.**‡**, Richardson, J. D.**‡**, et al. (2025)
 
 ## Quick start (Linux / WSL)
 
